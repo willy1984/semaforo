@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import persistencia.Vehicular;
 
 /**
@@ -12,54 +12,91 @@ import persistencia.Vehicular;
  * @author cvelez
  */
 public class Modelo {
-    
-    private VistaAnotacion modalAnotacion;
-    private VistaEntradas ventanaEntradas;
+
     private VistaSimulacion ventanaSimulacion;
-    private VistaTension ventanaTension;
-    
+
     private Vehicular semaforoVechicular;
-    
-    public VistaAnotacion getVistaAnotacion() {
-    
-        if (modalAnotacion == null) {
-            modalAnotacion = new VistaAnotacion(this);
-        }
-        return modalAnotacion;
-    }
-    
-    public VistaEntradas getVistaEntradas() {
-        
-        if (ventanaEntradas == null) {
-                ventanaEntradas = new VistaEntradas(this);
-            }
-            return ventanaEntradas;
-    }
-    
+
     public VistaSimulacion getVistaSimulacion() {
-        
+
         if (ventanaSimulacion == null) {
-                ventanaSimulacion = new VistaSimulacion(this);
-            }
+            ventanaSimulacion = new VistaSimulacion(this);
+        }
         return ventanaSimulacion;
     }
-    
-    public VistaTension getVistaTension() {
-        
-        if (ventanaTension == null) {
-                ventanaTension = new VistaTension(this);
-            }
-            return ventanaTension;
-    }
-    
-    public void pintarSemaforo(Graphics g) {
-        
-        semaforoVechicular.paintSemaforoVechiculo(g);
-    }
-    
+
     public void iniciar() {
         getVistaSimulacion().setSize(800, 600);
         getVistaSimulacion().setVisible(true);
         getVistaSimulacion().setLocationRelativeTo(null);
     }
+
+    /*
+    * Accion de encender o apagar la luz roja
+     */
+    void accionRojo(boolean accion, int grupo) {
+
+        if (grupo == 1) {
+            if (accion) {
+                getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+            }
+        } else {
+            if (accion) {
+                getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+                getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+                getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+            }
+        }
+
+    }
+
+    /*
+    * Accion de encender o apagar la luz amarilla
+     */
+    void accionAmarilla(boolean accion, int grupo) {
+
+        if (grupo == 1) {
+            if (accion) {
+                getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
+            }
+        } else {
+            if (accion) {
+                getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
+               
+            }
+        }
+
+    }
+
+    /*
+    * Accion de encender o apagar la luz verde
+     */
+    void accionVerde(boolean accion, int grupo) {
+
+        if (grupo == 1) {
+            if (accion) {
+                getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+            }
+        }else {
+            if (accion) {
+                getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+                getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+            } else {
+                getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+                getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+            }
+        }
+
+    }
+
 }
